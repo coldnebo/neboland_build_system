@@ -2,6 +2,8 @@ GEM
   remote: https://rubygems.org/
   specs:
     coderay (1.1.1)
+    erubis (2.7.0)
+    hashie (3.5.5)
     method_source (0.8.2)
     pry (0.10.4)
       coderay (~> 1.1.0)
@@ -14,6 +16,8 @@ PLATFORMS
   x86-mingw32
 
 DEPENDENCIES
+  erubis!
+  hashie!
   pry!
   rake!
 
