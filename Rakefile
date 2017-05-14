@@ -36,15 +36,16 @@ task :deploy do
   ftp.upload_from("build", sources)
 end
 
-desc "update mods"
+desc "update steam managed mods to server"
 task :update_mods do 
 
   Dir.chdir(abs_path(config.mods.dir)) do |path|
 
-    manifest = config.mods.list.map {|d| Dir.glob(File.join(path, d, '**', '*'))}.flatten
+    steam_mods = (config.mods.client.steam | config.mods.server.steam).sort
+    manifest = steam_mods.map {|d| Dir.glob(File.join(path, d, '**', '*'))}.flatten
     manifest = manifest.map {|f| f.gsub(/^#{path}\//,'') }   # make it relative path for upload
     files = manifest.select{|f| File.file?(f) }
-    dirs = manifest.select{|f| File.directory?(f) } + config.mods.list
+    dirs = manifest.select{|f| File.directory?(f) } + steam_mods
     files.sort!
     dirs.sort!
 
@@ -59,7 +60,7 @@ task :update_mods do
     end
 
     # and add them to the source.manifest if they aren't already present...
-    keys = key_files.map{|kf| File.join(key_dir,File.basename(kf)).gsub(root_to(""),'') }
+    keys = key_files.map{|kf| File.join(key_dir,File.basename(kf)).gsub(root_to("source/"),'') }
     sm = File.read(root_to("source.manifest"))
     remaining_keys = keys.reject{|k| sm =~ /#{k}/}
     unless remaining_keys.empty?
@@ -71,5 +72,16 @@ task :update_mods do
     ftp.mkdirs(dirs)
     ftp.upload_from(".", files, false)
   end
+
+end
+
+
+desc "generate command line for mods"
+task :generate do 
+  client_mods = config.mods.client.map{|k,v| v}.flatten.sort
+  server_mods = config.mods.server.map{|k,v| v}.flatten.sort
+
+  puts "mod=#{client_mods.join(";")}"
+  puts "servermod=#{server_mods.join(";")}"
 
 end
