@@ -12,9 +12,7 @@ require 'pry'
 # is this useful if a lot of changes in source are overwritten?
 desc "update source -- pulls fresh from server"
 task :update do 
-  sources.each do |file|
-    ftp.download_to("source", file)
-  end
+  ftp.download_to("source", sources)
 end
 
 
@@ -35,7 +33,43 @@ end
 
 desc "deploy the server"
 task :deploy do 
-  sources.each do |file|
-    ftp.upload_from("build", file)
+  ftp.upload_from("build", sources)
+end
+
+desc "update mods"
+task :update_mods do 
+
+  Dir.chdir(abs_path(config.mods.dir)) do |path|
+
+    manifest = config.mods.list.map {|d| Dir.glob(File.join(path, d, '**', '*'))}.flatten
+    manifest = manifest.map {|f| f.gsub(/^#{path}\//,'') }   # make it relative path for upload
+    files = manifest.select{|f| File.file?(f) }
+    dirs = manifest.select{|f| File.directory?(f) } + config.mods.list
+    files.sort!
+    dirs.sort!
+
+    # extract the key files...
+    key_files = files.select{|f| f =~ /\.bikey$/ }
+    key_dir = root_to(File.join('source','keys'))
+    FileUtils.mkdir_p(key_dir) unless Dir.exist?(key_dir)
+
+    # copy them to the local source dir...
+    key_files.each do |key_file|
+      FileUtils.cp(key_file, key_dir, verbose: true)
+    end
+
+    # and add them to the source.manifest if they aren't already present...
+    keys = key_files.map{|kf| File.join(key_dir,File.basename(kf)).gsub(root_to(""),'') }
+    sm = File.read(root_to("source.manifest"))
+    remaining_keys = keys.reject{|k| sm =~ /#{k}/}
+    unless remaining_keys.empty?
+      File.open(root_to("source.manifest"), 'a') do |f|
+        f.puts remaining_keys.join("\n")
+      end
+    end
+
+    ftp.mkdirs(dirs)
+    ftp.upload_from(".", files, false)
   end
+
 end
