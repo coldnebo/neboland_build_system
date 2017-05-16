@@ -81,9 +81,6 @@ def ftp
   }
 end
 
-def sources
-  @sources ||= File.read(root_to("source.manifest")).lines.map{|l| l.strip}
-end
 
 def process(src, dst, file)
   src_file = File.join(src, file)
@@ -98,5 +95,19 @@ def process(src, dst, file)
   File.open(dst_file, 'w+') do |f|
     f.puts eruby.result(binding())
   end
-  print "."
+  puts "erb #{src_file} -> #{dst_file}"
 end
+
+
+def stage(src, dst, file)
+  src_file = File.join(src, file)
+  return unless File.exist?(src_file)
+
+  dst_file = File.join(dst, file)
+  dst_dir = File.dirname(dst_file)
+  FileUtils.mkdir_p(dst_dir) unless Dir.exist?(dst_dir)
+    
+  FileUtils.cp(src_file, dst_file)
+  puts "staged #{src_file} -> #{dst_file}"
+end
+

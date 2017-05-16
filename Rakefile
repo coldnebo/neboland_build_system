@@ -8,6 +8,8 @@ $:.unshift File.join(File.dirname(__FILE__), 'lib')
 require 'helpers'
 require 'pry'
 
+import 'build.rake'
+
 
 # is this useful if a lot of changes in source are overwritten?
 desc "update source -- pulls fresh from server"
@@ -16,25 +18,14 @@ task :update do
 end
 
 
-desc "build the server"
-task :build do 
-  # build is always fresh
-  FileUtils.rm_rf("build") if Dir.exist?("build")
-  Dir.mkdir("build") 
-
-  print "processing"
-  sources.each do |file|
-    process("source", "build", file)
-  end
-  puts "done!"
-
-end
-
+staged = FileList['stage/**/*']
 
 desc "deploy the server"
-task :deploy do 
-  ftp.upload_from("build", sources)
+task :deploy => staged do 
+  files = staged.select{|f| File.file?(f)}.map{|f| f.pathmap("%-1d/%f")}
+  ftp.upload_from("stage", files)
 end
+
 
 desc "update steam managed mods to server"
 task :update_mods do 
