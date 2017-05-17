@@ -37,23 +37,35 @@ task :build_untouched do
 end
 
 
-multitask build_mods: %w[build_infistar]
+multitask build_mods: [
+  "stage/@ExileServer/addons/a3_infiSTAR_Exile.pbo"
+]
+infistar = {}
+infistar[:source_dir] = "source/mods/infiSTAR.de_EXILE/SERVER_ARMA3_FOLDER/@infiSTAR_Exile/addons/a3_infiSTAR_Exile"
+infistar[:files] = Rake::FileList["#{infistar[:source_dir]}/**/*"].select{|f| File.file?(f)}
 
-task :build_infistar do 
-  source_dir = "source/mods/infiSTAR.de_EXILE/SERVER_ARMA3_FOLDER/@infiSTAR_Exile/addons/a3_infiSTAR_Exile"
-  files = Rake::FileList["#{source_dir}/**/*"]
-  files = files.select{|f| File.file?(f)}
+
+file "stage/@ExileServer/addons/a3_infiSTAR_Exile.pbo" => infistar[:files] do 
+  
   build_dir = "build/mods/a3_infiSTAR_Exile"
+  target_pbo = "stage/@ExileServer/addons/a3_infiSTAR_Exile.pbo"
 
-  process_files = Rake::FileList["#{source_dir}/**/EXILE_AHAT_CONFIG.hpp"]
+  process_files = Rake::FileList["#{infistar[:source_dir]}/**/EXILE_AHAT_CONFIG.hpp"]
 
-  files.each do |f|
-    build_file = f.pathmap("%{^#{source_dir},#{build_dir}}p")
+  infistar[:files].each do |f|
+    build_file = f.pathmap("%{^#{infistar[:source_dir]},#{build_dir}}p")
     if process_files.include?(f)
       process(f,build_file)
     else
       stage(f,build_file)
     end
+  end
+
+  make_pbo(build_dir,target_pbo)
+
+  dlls = Rake::FileList["source/mods/infiSTAR.de_EXILE/SERVER_ARMA3_FOLDER/*.dll"]
+  dlls.each do |f|
+    stage(f,f.pathmap("stage/%f"))
   end
 
 end

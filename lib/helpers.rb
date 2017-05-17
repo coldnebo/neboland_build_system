@@ -103,3 +103,9 @@ def stage(src, dst)
   puts "staged #{src} -> #{dst}"
 end
 
+
+def make_pbo(src_dir, dst_pbo)
+  addon_builder = %{"/games/Steam/steamapps/common/Arma 3 Tools/AddonBuilder/AddonBuilder.exe"}
+  dir = File.dirname(dst_pbo)
+  `#{addon_builder} "#{abs_path(src_dir)}" "#{abs_path(dir)}"`
+end
