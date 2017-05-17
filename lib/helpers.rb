@@ -82,32 +82,24 @@ def ftp
 end
 
 
-def process(src, dst, file)
-  src_file = File.join(src, file)
-  return unless File.exist?(src_file)
-
-  dst_file = File.join(dst, file)
-  input = File.read(src_file)
+def process(src, dst)
+  return unless File.exist?(src)
+  input = File.read(src)
   eruby = Erubis::Eruby.new(input)
-
-  dst_dir = File.dirname(dst_file)
+  dst_dir = File.dirname(dst)
   FileUtils.mkdir_p(dst_dir) unless Dir.exist?(dst_dir)
-  File.open(dst_file, 'w+') do |f|
+  File.open(dst, 'w+') do |f|
     f.puts eruby.result(binding())
   end
-  puts "erb #{src_file} -> #{dst_file}"
+  puts "erb #{src} -> #{dst}"
 end
 
 
-def stage(src, dst, file)
-  src_file = File.join(src, file)
-  return unless File.exist?(src_file)
-
-  dst_file = File.join(dst, file)
-  dst_dir = File.dirname(dst_file)
+def stage(src, dst)
+  return unless File.exist?(src)
+  dst_dir = File.dirname(dst)
   FileUtils.mkdir_p(dst_dir) unless Dir.exist?(dst_dir)
-    
-  FileUtils.cp(src_file, dst_file)
-  puts "staged #{src_file} -> #{dst_file}"
+  FileUtils.cp(src, dst)
+  puts "staged #{src} -> #{dst}"
 end
 
