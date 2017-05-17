@@ -22,7 +22,7 @@ staged = FileList['stage/**/*']
 
 desc "deploy the server"
 task :deploy => staged do 
-  files = staged.select{|f| File.file?(f)}.map{|f| f.pathmap("%-1d/%f")}
+  files = staged.select{|f| File.file?(f)}.map{|f| f.pathmap("%{^stage/,}p")}
   ftp.upload_from("stage", files)
 end
 
