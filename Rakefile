@@ -50,16 +50,6 @@ task :update_mods do
       FileUtils.cp(key_file, key_dir, verbose: true)
     end
 
-    # and add them to the source.manifest if they aren't already present...
-    keys = key_files.map{|kf| File.join(key_dir,File.basename(kf)).gsub(root_to("source/"),'') }
-    sm = File.read(root_to("source.manifest"))
-    remaining_keys = keys.reject{|k| sm =~ /#{k}/}
-    unless remaining_keys.empty?
-      File.open(root_to("source.manifest"), 'a') do |f|
-        f.puts remaining_keys.join("\n")
-      end
-    end
-
     ftp.mkdirs(dirs)
     ftp.upload_from(".", files, false)
   end
