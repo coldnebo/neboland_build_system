@@ -11,11 +11,11 @@ require 'pry'
 import 'build.rake'
 
 
-# is this useful if a lot of changes in source are overwritten?
-desc "update source -- pulls fresh from server"
-task :update do 
-  ftp.download_to("source", sources)
-end
+# # is this useful if a lot of changes in source are overwritten?
+# desc "update source -- pulls fresh from server"
+# task :update do 
+#   ftp.download_to("source", sources)
+# end
 
 
 staged = FileList['stage/**/*']
