@@ -50,6 +50,9 @@ task :update_mods do
       FileUtils.cp(key_file, key_dir, verbose: true)
     end
 
+    # copy an admin only client side key for @Ares
+    FileUtils.cp("@Ares/keys/Ares_1_8_0.bikey", key_dir, verbose: true)
+
     ftp.mkdirs(dirs)
     ftp.upload_from(".", files, false)
   end
