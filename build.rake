@@ -81,7 +81,7 @@ build_pbo({
         name: "Exile.Tanoa",
   source_dir: "source/mods/Exile.Tanoa",
    build_dir: "build/mods/Exile.Tanoa",
-  target_pbo: "stage/mpmissions/Exile.Tanoa.pbo"
+  target_pbo: "stage/mpmissions/Exile.Tanoa.pbo" 
 }) do |conf|
 
   infistar_files = Rake::FileList["source/mods/infiSTAR.de_EXILE/MPMission/**/*"]
@@ -105,7 +105,8 @@ build_pbo({
         name: "Alive: Operation_Landlord.Altis",
   source_dir: "source/mods/Operation_Landlord.Altis",
    build_dir: "build/mods/Operation_Landlord.Altis",
-  target_pbo: "stage/mpmissions/Operation_Landlord.Altis.pbo"
+  target_pbo: "stage/mpmissions/Operation_Landlord.Altis.pbo",
+      prefix: "Operation_Landlord.Altis"
 }) do |conf|
 
   conf.source_files.each do |f|
@@ -113,7 +114,7 @@ build_pbo({
     stage(f,build_file)
   end
 
-  make_pbo(conf.build_dir, conf.target_pbo)
+  make_pbo(conf.build_dir, conf.target_pbo, prefix: conf.prefix)
 
 end
 

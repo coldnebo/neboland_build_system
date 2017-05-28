@@ -108,16 +108,16 @@ def stage(src, dst)
 end
 
 # calls arma3 tools to actually package the pbo
-def make_pbo(src_dir, dst_pbo)
+def make_pbo(src_dir, dst_pbo, opts={})
   addon_builder = %{"/games/Steam/steamapps/common/Arma 3 Tools/AddonBuilder/AddonBuilder.exe"}
+  
   include_file = "source/mods/addonbuilder_includes.txt"
-  include_opt = %{-include="#{abs_path(include_file)}"} unless include_file.nil?
+  include_opt = %{-include="#{abs_path(include_file)}"}
+
+  prefix_opt = %{-prefix="#{opts[:prefix]}"} unless opts[:prefix].nil?
+  
   dir = File.dirname(dst_pbo)
-  #include_opt = %{-include="/games/NeboLand2/source/mods/Operation_Landlord.Altis/ALiVE.paa"}
-  #include_opt = %{-include="#{File.join(abs_path(src_dir),"**.paa")}"} unless include_file.nil?
-  cmd = %{#{addon_builder} "#{abs_path(src_dir)}" "#{abs_path(dir)}" -clear -project="#{abs_path(src_dir)}" #{include_opt}}
-  #cmd = %{#{addon_builder} "#{abs_path(src_dir)}" "#{abs_path(dir)}" -clear}
-  #cmd = %{#{addon_builder} "#{abs_path(src_dir)}" "#{abs_path(dir)}" -clear #{include_opt}}
+  cmd = %{#{addon_builder} "#{abs_path(src_dir)}" "#{abs_path(dir)}" -clear -project="#{abs_path(src_dir)}" #{include_opt} #{prefix_opt}}
   #cmd = %{#{addon_builder} -help}
   puts cmd
   out = `#{cmd}`
