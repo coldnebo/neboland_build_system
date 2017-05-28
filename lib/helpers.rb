@@ -7,6 +7,10 @@ def abs_path(path)
   cpath = `cygpath -au '#{path}'`.strip[2..-1]
 end
 
+def win_path(path)
+  wpath = `cygpath -aw '#{path}'`.strip
+end
+
 # @param from [String] defaults to project root path.
 # e.g. root_to('dir', 'file')
 def root_to(file)
@@ -103,9 +107,27 @@ def stage(src, dst)
   puts "staged #{src} -> #{dst}"
 end
 
-
+# calls arma3 tools to actually package the pbo
 def make_pbo(src_dir, dst_pbo)
   addon_builder = %{"/games/Steam/steamapps/common/Arma 3 Tools/AddonBuilder/AddonBuilder.exe"}
+  include_file = "source/mods/addonbuilder_includes.txt"
+  include_opt = %{-include="#{abs_path(include_file)}"} unless include_file.nil?
   dir = File.dirname(dst_pbo)
-  `#{addon_builder} "#{abs_path(src_dir)}" "#{abs_path(dir)}"`
+  #include_opt = %{-include="/games/NeboLand2/source/mods/Operation_Landlord.Altis/ALiVE.paa"}
+  #include_opt = %{-include="#{File.join(abs_path(src_dir),"**.paa")}"} unless include_file.nil?
+  cmd = %{#{addon_builder} "#{abs_path(src_dir)}" "#{abs_path(dir)}" -clear -project="#{abs_path(src_dir)}" #{include_opt}}
+  #cmd = %{#{addon_builder} "#{abs_path(src_dir)}" "#{abs_path(dir)}" -clear}
+  #cmd = %{#{addon_builder} "#{abs_path(src_dir)}" "#{abs_path(dir)}" -clear #{include_opt}}
+  #cmd = %{#{addon_builder} -help}
+  puts cmd
+  out = `#{cmd}`
+  puts out
+end
+
+# creates a rake file task coordinating the build of a pbo 
+def build_pbo(config, &block)
+  conf = OpenStruct.new(config)
+  conf.source_files = Rake::FileList["#{conf.source_dir}/**/*"].select{|f| File.file?(f)}
+  rake_block = Proc.new {|t,args| yield(conf) }
+  file(conf.target_pbo => conf.source_files, &rake_block)
 end

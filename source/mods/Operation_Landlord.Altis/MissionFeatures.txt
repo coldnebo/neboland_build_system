@@ -1,0 +1,30 @@
+Operation Landlord
+	by: SpyderBlack723
+
+	This file will cover all of the parts of the mission that are not part of ALiVE.
+
+
+-----------------BIS Virtual Arsenal-----------------
+	Author: BIS...
+	Link: https://community.bistudio.com/wiki/Arsenal
+
+		This has the same function as the Virtual Ammobox, but it is MUCH easier to implement and is made by BIS so it is officially supported. It is also much better for choosing
+	the right uniform for a mission as you are able to rotate the camer around your character as you change gear.
+
+					How to add to mission:
+	1. Simply add this code to the initialization box of an ammobox or object that you want the Virtual Arsenal to be available from
+
+					this addAction ["BIS Arsenal", {["Open",true] spawn BIS_fnc_arsenal}];
+
+
+-----------------Halo Jump-----------------
+	Author: SpyderBlack723
+	Link: None, just pull the HaloJump.sqf script out of the mission (Located inside the "Scripts" folder)
+
+		This simple action allows you to click a spot on the map and "Halo Jump onto that position". When you are transported into the air, the script saves your current backpack and all
+	gear that is currently inside. It then waits until you are on the ground and it gives you your original gear back. This allows you to carry heavier loadouts due to not having to deal with carrying
+	a parachute just to make it safely onto the ground.
+
+					How to add to mission:
+	1. Add this line of code to the init line of the object that you want to have the action: this addAction["Halo Insertion", "Scripts\HaloJump.sqf"];
+	2. Add the Scripts\HaloJump.sqf file to your own mission to make sure that the action added in step 1 has a file to call.

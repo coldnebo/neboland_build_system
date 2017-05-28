@@ -39,22 +39,26 @@ end
 
 multitask build_mods: [
   "stage/@ExileServer/addons/a3_infiSTAR_Exile.pbo",
-  "stage/mpmissions/Exile.Tanoa.pbo"
+  "stage/mpmissions/Exile.Tanoa.pbo",
+  "stage/mpmissions/Operation_Landlord.Altis.pbo"
 ]
-infistar = {}
-infistar[:source_dir] = "source/mods/infiSTAR.de_EXILE/SERVER_ARMA3_FOLDER/@infiSTAR_Exile/addons/a3_infiSTAR_Exile"
-infistar[:files] = Rake::FileList["#{infistar[:source_dir]}/**/*"].select{|f| File.file?(f)}
 
 
-file "stage/@ExileServer/addons/a3_infiSTAR_Exile.pbo" => infistar[:files] do 
-  
-  build_dir = "build/mods/a3_infiSTAR_Exile"
-  target_pbo = "stage/@ExileServer/addons/a3_infiSTAR_Exile.pbo"
 
-  process_files = Rake::FileList["#{infistar[:source_dir]}/**/EXILE_AHAT_CONFIG.hpp"]
 
-  infistar[:files].each do |f|
-    build_file = f.pathmap("%{^#{infistar[:source_dir]},#{build_dir}}p")
+
+
+build_pbo({
+        name: "infiSTAR_Exile",
+  source_dir: "source/mods/infiSTAR.de_EXILE/SERVER_ARMA3_FOLDER/@infiSTAR_Exile/addons/a3_infiSTAR_Exile",
+   build_dir: "build/mods/a3_infiSTAR_Exile",
+  target_pbo: "stage/@ExileServer/addons/a3_infiSTAR_Exile.pbo"
+}) do |conf|
+
+  process_files = Rake::FileList["#{conf.source_dir}/**/EXILE_AHAT_CONFIG.hpp"]
+
+  conf.source_files.each do |f|
+    build_file = f.pathmap("%{^#{conf.source_dir},#{conf.build_dir}}p")
     if process_files.include?(f)
       process(f,build_file)
     else
@@ -62,8 +66,9 @@ file "stage/@ExileServer/addons/a3_infiSTAR_Exile.pbo" => infistar[:files] do
     end
   end
 
-  make_pbo(build_dir,target_pbo)
+  make_pbo(conf.build_dir, conf.target_pbo)
 
+  # additional copy files...
   dlls = Rake::FileList["source/mods/infiSTAR.de_EXILE/SERVER_ARMA3_FOLDER/*.dll"]
   dlls.each do |f|
     stage(f,f.pathmap("stage/%f"))
@@ -71,26 +76,51 @@ file "stage/@ExileServer/addons/a3_infiSTAR_Exile.pbo" => infistar[:files] do
 
 end
 
-mission = {}
-mission[:source_dir] = "source/mods/Exile.Tanoa"
-mission[:files] = Rake::FileList["#{mission[:source_dir]}/**/*"].select{|f| File.file?(f)}
-file "stage/mpmissions/Exile.Tanoa.pbo" => mission[:files] do 
 
-  build_dir = "build/mods/Exile.Tanoa"
-  target_pbo = "stage/mpmissions/Exile.Tanoa.pbo"
+build_pbo({
+        name: "Exile.Tanoa",
+  source_dir: "source/mods/Exile.Tanoa",
+   build_dir: "build/mods/Exile.Tanoa",
+  target_pbo: "stage/mpmissions/Exile.Tanoa.pbo"
+}) do |conf|
 
   infistar_files = Rake::FileList["source/mods/infiSTAR.de_EXILE/MPMission/**/*"]
 
-  mission[:files].each do |f|
-    build_file = f.pathmap("%{^#{mission[:source_dir]},#{build_dir}}p")
+  conf.source_files.each do |f|
+    build_file = f.pathmap("%{^#{conf.source_dir},#{conf.build_dir}}p")
     stage(f,build_file)
   end
 
   infistar_files.each do |f|
-    build_file = f.pathmap("%{^source/mods/infiSTAR.de_EXILE/MPMission,#{build_dir}}p")
+    build_file = f.pathmap("%{^source/mods/infiSTAR.de_EXILE/MPMission,#{conf.build_dir}}p")
     stage(f,build_file)
   end
 
-  make_pbo(build_dir,target_pbo)
+  make_pbo(conf.build_dir, conf.target_pbo)
 
 end
+
+
+build_pbo({
+        name: "Alive: Operation_Landlord.Altis",
+  source_dir: "source/mods/Operation_Landlord.Altis",
+   build_dir: "build/mods/Operation_Landlord.Altis",
+  target_pbo: "stage/mpmissions/Operation_Landlord.Altis.pbo"
+}) do |conf|
+
+  conf.source_files.each do |f|
+    build_file = f.pathmap("%{^#{conf.source_dir},#{conf.build_dir}}p")
+    stage(f,build_file)
+  end
+
+  make_pbo(conf.build_dir, conf.target_pbo)
+
+end
+
+
+
+# file "stage/mpmissions/Operation_Landlord.Altis.pbo" do 
+#   target_pbo = "stage/mpmissions/Operation_Landlord.Altis.pbo"
+#   source = "source/mods/Operation Landlord - SpyderBlack723/Operation_Landlord.Altis.pbo"
+#   stage(source,target_pbo)
+# end
