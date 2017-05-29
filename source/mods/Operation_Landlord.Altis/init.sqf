@@ -10,6 +10,9 @@ if (hasInterface) then {
 	waituntil {!(isnull player)};
 	sleep 8;
 	
+	player enablefatigue false;
+	player forceWalk false;
+
 	_object = player;
 	_camx = getposATL player select 0;
 	_camy = getposATL player select 1;
@@ -32,3 +35,4 @@ if (hasInterface) then {
 	_cam CameraEffect ["Terminate","Back"];
 	CamDestroy _cam;
 };
+
