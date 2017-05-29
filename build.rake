@@ -52,7 +52,8 @@ build_pbo({
         name: "infiSTAR_Exile",
   source_dir: "source/mods/infiSTAR.de_EXILE/SERVER_ARMA3_FOLDER/@infiSTAR_Exile/addons/a3_infiSTAR_Exile",
    build_dir: "build/mods/a3_infiSTAR_Exile",
-  target_pbo: "stage/@ExileServer/addons/a3_infiSTAR_Exile.pbo"
+  target_pbo: "stage/@ExileServer/addons/a3_infiSTAR_Exile.pbo",
+      prefix: "a3_infiSTAR_Exile" 
 }) do |conf|
 
   process_files = Rake::FileList["#{conf.source_dir}/**/EXILE_AHAT_CONFIG.hpp"]
@@ -66,7 +67,7 @@ build_pbo({
     end
   end
 
-  make_pbo(conf.build_dir, conf.target_pbo)
+  make_pbo(conf.build_dir, conf.target_pbo, prefix: conf.prefix)
 
   # additional copy files...
   dlls = Rake::FileList["source/mods/infiSTAR.de_EXILE/SERVER_ARMA3_FOLDER/*.dll"]
@@ -81,7 +82,8 @@ build_pbo({
         name: "Exile.Tanoa",
   source_dir: "source/mods/Exile.Tanoa",
    build_dir: "build/mods/Exile.Tanoa",
-  target_pbo: "stage/mpmissions/Exile.Tanoa.pbo" 
+  target_pbo: "stage/mpmissions/Exile.Tanoa.pbo",
+      prefix: "Exile.Tanoa"
 }) do |conf|
 
   infistar_files = Rake::FileList["source/mods/infiSTAR.de_EXILE/MPMission/**/*"]
@@ -96,7 +98,7 @@ build_pbo({
     stage(f,build_file)
   end
 
-  make_pbo(conf.build_dir, conf.target_pbo)
+  make_pbo(conf.build_dir, conf.target_pbo, prefix: conf.prefix)
 
 end
 
