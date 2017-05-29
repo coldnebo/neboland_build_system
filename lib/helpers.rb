@@ -115,9 +115,13 @@ def make_pbo(src_dir, dst_pbo, opts={})
   include_opt = %{-include="#{abs_path(include_file)}"}
 
   prefix_opt = %{-prefix="#{opts[:prefix]}"} unless opts[:prefix].nil?
+  sign_opt = %{-sign="#{abs_path(opts[:sign])}"} unless opts[:sign].nil?
+  pack_only_opt = %{-packonly} unless opts[:packonly].nil?
   
   dir = File.dirname(dst_pbo)
-  cmd = %{#{addon_builder} "#{abs_path(src_dir)}" "#{abs_path(dir)}" -clear -project="#{abs_path(src_dir)}" #{include_opt} #{prefix_opt}}
+  cmd = %{#{addon_builder} "#{abs_path(src_dir)}" "#{abs_path(dir)}" -clear -project="#{abs_path(src_dir)}"}
+  cmd = cmd + " #{include_opt} #{prefix_opt} #{sign_opt}"
+
   #cmd = %{#{addon_builder} -help}
   puts cmd
   out = `#{cmd}`
