@@ -40,12 +40,29 @@ end
 multitask build_mods: [
   "stage/@ExileServer/addons/a3_infiSTAR_Exile.pbo",
   "stage/mpmissions/Exile.Tanoa.pbo",
-  "stage/mpmissions/Operation_Landlord.Altis.pbo"
+  "stage/mpmissions/Operation_Landlord.Altis.pbo",
+  "stage/@ExileServer/addons/a3_dms"
 ]
 
 
 
 
+build_pbo({
+        name: "a3_dms",
+  source_dir: "source/mods/a3_dms",
+   build_dir: "build/mods/a3_dms",
+  target_pbo: "stage/@ExileServer/addons/a3_dms.pbo",
+      prefix: "x\\addons\\DMS" 
+}) do |conf|
+
+  conf.source_files.each do |f|
+    build_file = f.pathmap("%{^#{conf.source_dir},#{conf.build_dir}}p")
+    stage(f,build_file)
+  end
+
+  make_pbo(conf.build_dir, conf.target_pbo, prefix: conf.prefix)
+
+end
 
 
 build_pbo({
