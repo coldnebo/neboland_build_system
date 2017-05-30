@@ -41,7 +41,7 @@ multitask build_mods: [
   "stage/@ExileServer/addons/a3_infiSTAR_Exile.pbo",
   "stage/mpmissions/Exile.Tanoa.pbo",
   "stage/mpmissions/Operation_Landlord.Altis.pbo",
-  "stage/@ExileServer/addons/a3_dms"
+  "stage/@ExileServer/addons/a3_dms.pbo"
 ]
 
 
