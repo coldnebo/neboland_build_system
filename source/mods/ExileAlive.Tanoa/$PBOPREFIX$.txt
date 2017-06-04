@@ -1,0 +1,5 @@
+///'Exile.Tanoa.pbo' from Mikero's dos tools, dll version 5.66///
+prefix=Exile.Tanoa
+Pbo Type is: Arma Mission Addon
+Sha: 'B414B4FD4396A4FD41D5B18BA590AB054FBE0C6F'
+//////</HEADER>//////

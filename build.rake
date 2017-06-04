@@ -40,6 +40,7 @@ end
 multitask build_mods: [
   "stage/@ExileServer/addons/a3_infiSTAR_Exile.pbo",
   "stage/mpmissions/Exile.Tanoa.pbo",
+  "stage/mpmissions/ExileAlive.Tanoa.pbo",
   "stage/mpmissions/Operation_Landlord.Altis.pbo",
   "stage/@ExileServer/addons/a3_dms.pbo"
 ]
@@ -118,6 +119,32 @@ build_pbo({
   make_pbo(conf.build_dir, conf.target_pbo, prefix: conf.prefix)
 
 end
+
+
+build_pbo({
+        name: "ExileAlive.Tanoa",
+  source_dir: "source/mods/ExileAlive.Tanoa",
+   build_dir: "build/mods/ExileAlive.Tanoa",
+  target_pbo: "stage/mpmissions/ExileAlive.Tanoa.pbo",
+      prefix: "ExileAlive.Tanoa"
+}) do |conf|
+
+  #infistar_files = Rake::FileList["source/mods/infiSTAR.de_EXILE/MPMission/**/*"]
+
+  conf.source_files.each do |f|
+    build_file = f.pathmap("%{^#{conf.source_dir},#{conf.build_dir}}p")
+    stage(f,build_file)
+  end
+
+  # infistar_files.each do |f|
+  #   build_file = f.pathmap("%{^source/mods/infiSTAR.de_EXILE/MPMission,#{conf.build_dir}}p")
+  #   stage(f,build_file)
+  # end
+
+  make_pbo(conf.build_dir, conf.target_pbo, prefix: conf.prefix)
+
+end
+
 
 
 build_pbo({
