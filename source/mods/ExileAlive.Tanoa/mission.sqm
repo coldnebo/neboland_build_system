@@ -8,7 +8,7 @@ class EditorData
 	toggles=1;
 	class ItemIDProvider
 	{
-		nextID=310;
+		nextID=312;
 	};
 	class MarkerIDProvider
 	{
@@ -16,10 +16,10 @@ class EditorData
 	};
 	class Camera
 	{
-		pos[]={2507.0002,265.6795,12350.033};
-		dir[]={0.60741132,-0.36890689,-0.70354402};
-		up[]={0.24108151,0.92946351,-0.27923614};
-		aside[]={-0.75693399,2.8467912e-007,-0.6535027};
+		pos[]={7901.4312,81.083038,8451.291};
+		dir[]={0,-0.70710683,0.70710671};
+		up[]={0,0.70710665,0.70710677};
+		aside[]={0.99999994,0,-0};
 	};
 };
 binarizationWanted=0;
@@ -4961,11 +4961,11 @@ class Mission
 			dataType="Logic";
 			class PositionInfo
 			{
-				position[]={4187.6738,0.00019836426,10334.698};
+				position[]={8438.9736,19.526712,10066.117};
+				angles[]={0.031991884,0,6.2645278};
 			};
 			id=249;
 			type="ALiVE_civ_placement";
-			atlOffset=26.848999;
 			class CustomAttributes
 			{
 				class Attribute0
@@ -6473,11 +6473,11 @@ class Mission
 	{
 		class LinkIDProvider
 		{
-			nextID=8;
+			nextID=7;
 		};
 		class Links
 		{
-			items=8;
+			items=7;
 			class Item0
 			{
 				linkID=0;
@@ -6543,16 +6543,6 @@ class Mission
 				linkID=6;
 				item0=306;
 				item1=247;
-				class CustomData
-				{
-					type="Sync";
-				};
-			};
-			class Item7
-			{
-				linkID=7;
-				item0=246;
-				item1=250;
 				class CustomData
 				{
 					type="Sync";
