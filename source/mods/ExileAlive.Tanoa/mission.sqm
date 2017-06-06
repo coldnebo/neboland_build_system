@@ -19,7 +19,7 @@ class EditorData
 		pos[]={7901.4312,81.083038,8451.291};
 		dir[]={0,-0.70710683,0.70710671};
 		up[]={0,0.70710665,0.70710677};
-		aside[]={0.99999994,0,-0};
+		aside[]={0.99999994,0,0};
 	};
 };
 binarizationWanted=0;
@@ -3335,7 +3335,7 @@ class Mission
 			a=15;
 			b=15;
 			id=187;
-			atlOffset=0.082794189;
+			atlOffset=0.33940125;
 		};
 		class Item88
 		{
@@ -3863,7 +3863,7 @@ class Mission
 									"BOOL"
 								};
 							};
-							value=0;
+							value=1;
 						};
 					};
 				};
@@ -3977,7 +3977,7 @@ class Mission
 									"BOOL"
 								};
 							};
-							value=0;
+							value=1;
 						};
 					};
 				};
