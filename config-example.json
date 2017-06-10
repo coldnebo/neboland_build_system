@@ -1,0 +1,41 @@
+{
+  "ftp": {
+    "host": "ip_address",
+    "port": "port",
+    "username": "username",
+    "password": "ftp_password",
+    "basedir": "/path/to/base"
+  },
+  "server": {
+    "password": "password",
+    "admin_password": "admin_password",
+    "command_password": "command_password",
+    "admin_uid": "steam_uid"
+  },
+  "mods": {
+    "dir": "/path/to/steam/workshop/mods",
+    "client": {
+      "steam": [
+        "@CBA_A3",
+        "@CUP Units",
+        "@CUP Vehicles",
+        "@CUP Weapons"
+      ],
+      // if you aren't using hosthavoc, this will need to be adapted.
+      "hosthavoc": [
+        "@Exile"
+      ]
+    },
+    "server": {
+      "steam": [
+        // server mods from steam here..
+      ],
+      "hosthavoc": [
+        "@ExileServer"
+      ]
+    }
+  },
+  "tools": {
+    "AddonBuilder": "/games/Steam/steamapps/common/Arma 3 Tools/AddonBuilder/AddonBuilder.exe"
+  }
+}

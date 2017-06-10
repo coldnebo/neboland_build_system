@@ -13,3 +13,9 @@
 * /A3DS/Server.cfg
 You will need to update the Missions section from Changeme.Altis to one of the actual MP missions.
 
+## Submodule management
+
+$ git submodule update
+
+can cd into submod: e.g. source/mods/DMS_Exile and do regular git ops from there.
+
