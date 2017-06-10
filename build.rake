@@ -15,7 +15,8 @@ directory 'build'
 directory 'stage'
 
 erb_files = Rake::FileList[
-  'source/A3DS/server.cfg'
+  'source/A3DS/server.cfg',
+  'source/@ExileServer/config.cfg'
 ]
 
 untouched_files = Rake::FileList[
