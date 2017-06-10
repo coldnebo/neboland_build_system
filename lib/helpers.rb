@@ -85,7 +85,9 @@ def ftp
   }
 end
 
-
+# uses Erubis to preprocess a file
+# @param src the input file with erb templating
+# @param dst the preprocessed output file
 def process(src, dst)
   return unless File.exist?(src)
   input = File.read(src)
@@ -98,7 +100,7 @@ def process(src, dst)
   puts "erb #{src} -> #{dst}"
 end
 
-
+# copies the file from src to dst, ensuring the same dir structure.
 def stage(src, dst)
   return unless File.exist?(src)
   dst_dir = File.dirname(dst)
@@ -129,10 +131,37 @@ def make_pbo(src_dir, dst_pbo, opts={})
   puts out
 end
 
+
+def pbo_targets
+  @pbo_targets ||= []
+end
+
 # creates a rake file task coordinating the build of a pbo 
 def build_pbo(config, &block)
   conf = OpenStruct.new(config)
   conf.source_files = Rake::FileList["#{conf.source_dir}/**/*"].select{|f| File.file?(f)}
-  rake_block = Proc.new {|t,args| yield(conf) }
+  rake_block = Proc.new {|t,args| 
+    # if files in your pbos require access to config.json vars, you 
+    # can preprocess them through Erubis by adding the file list to 
+    # conf.process_files
+    conf.process_files = []
+
+    # the build_dir is usually the same as the source_dir, so it's calculated if not provided...
+    conf.build_dir = conf.source_dir.pathmap("%{^source/,build/}p") if conf.build_dir.nil?
+    
+    yield(conf) if block_given?
+
+    conf.source_files.each do |f|
+      build_file = f.pathmap("%{^#{conf.source_dir},#{conf.build_dir}}p")
+      if !conf.process_files.empty? && conf.process_files.include?(f)
+        process(f,build_file)
+      else
+        stage(f,build_file)
+      end
+    end
+
+    make_pbo(conf.build_dir, conf.target_pbo, prefix: conf.prefix) 
+  }
   file(conf.target_pbo => conf.source_files, &rake_block)
+  pbo_targets.push(conf.target_pbo)
 end
