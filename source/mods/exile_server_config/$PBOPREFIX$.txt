@@ -1,0 +1,5 @@
+///'exile_server_config.pbo' from Mikero's dos tools, dll version 5.66///
+prefix=exile_server_config
+Pbo Type is: Arma Addon
+Sha: 'F4A5A085D9ADC5DB00E1A554FFE67E5475EDC53C'
+//////</HEADER>//////

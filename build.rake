@@ -42,9 +42,29 @@ multitask build_mods: [
   "stage/mpmissions/Exile.Tanoa.pbo",
   "stage/mpmissions/ExileAlive.Tanoa.pbo",
   "stage/mpmissions/Operation_Landlord.Altis.pbo",
-  "stage/@ExileServer/addons/a3_dms.pbo"
+  "stage/@ExileServer/addons/a3_dms.pbo",
+  "stage/@ExileServer/addons/exile_server_config.pbo"
 ]
 
+
+
+
+build_pbo({
+        name: "exile_server_config",
+  source_dir: "source/mods/exile_server_config",
+   build_dir: "build/mods/exile_server_config",
+  target_pbo: "stage/@ExileServer/addons/exile_server_config.pbo",
+      prefix: "exile_server_config" 
+}) do |conf|
+
+  conf.source_files.each do |f|
+    build_file = f.pathmap("%{^#{conf.source_dir},#{conf.build_dir}}p")
+    process(f,build_file)
+  end
+
+  make_pbo(conf.build_dir, conf.target_pbo, prefix: conf.prefix)
+
+end
 
 
 
