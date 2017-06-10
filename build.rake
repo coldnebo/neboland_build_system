@@ -61,7 +61,8 @@ end
 
 build_pbo({
         name: "a3_dms",
-  source_dir: "source/mods/a3_dms",
+  source_dir: "source/mods/DMS_Exile/@ExileServer/addons/a3_dms",
+   build_dir: "build/mods/a3_dms",
   target_pbo: "stage/@ExileServer/addons/a3_dms.pbo",
       prefix: "x\\addons\\DMS" 
 }) 

@@ -1,0 +1,3 @@
+[submodule "source/mods/DMS_Exile"]
+	path = source/mods/DMS_Exile
+	url = https://github.com/Defent/DMS_Exile.git

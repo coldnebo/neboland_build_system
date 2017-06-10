@@ -112,7 +112,7 @@ end
 # calls arma3 tools to actually package the pbo
 # note that you have to be logged in for steam tools to work.
 def make_pbo(src_dir, dst_pbo, opts={})
-  addon_builder = %{"/games/Steam/steamapps/common/Arma 3 Tools/AddonBuilder/AddonBuilder.exe"}
+  addon_builder = %{"#{config.tools.AddonBuilder}"}
   
   include_file = "source/mods/addonbuilder_includes.txt"
   include_opt = %{-include="#{abs_path(include_file)}"}
