@@ -121,6 +121,14 @@ build_pbo({
 }) 
 
 
+#D:\games\NeboLand2\source\mods\occupation\source\a3_exile_occupation\$PREFIX$
+build_pbo({
+        name: "a3_dms",
+  source_dir: "source/mods/occupation/source/a3_exile_occupation",
+   build_dir: "build/mods/a3_exile_occupation",
+  target_pbo: "stage/@ExileServer/addons/a3_exile_occupation.pbo",
+      prefix: "x\\addons\\a3_exile_occupation" 
+}) 
 
 
 

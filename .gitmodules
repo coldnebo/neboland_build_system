@@ -1,3 +1,6 @@
 [submodule "source/mods/DMS_Exile"]
 	path = source/mods/DMS_Exile
 	url = https://github.com/Defent/DMS_Exile.git
+[submodule "source/mods/occupation"]
+	path = source/mods/occupation
+	url = https://github.com/kuplion/a3_exile_occupation.git
