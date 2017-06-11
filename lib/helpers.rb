@@ -129,6 +129,9 @@ def make_pbo(src_dir, dst_pbo, opts={})
   puts cmd
   out = `#{cmd}`
   puts out
+  if out =~ /Arma 3 Tools path not set/
+    puts "[BUILD_WARNING]: You need to be logged in to Steam and have the Arma 3 Tools (http://store.steampowered.com/app/233800/Arma_3_Tools/) in your Library."
+  end
 end
 
 
