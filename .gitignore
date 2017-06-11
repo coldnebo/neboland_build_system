@@ -1,3 +1,6 @@
 config.json
 build/
 stage/
+
+# we don't want to check in this commercial code
+source/mods/infiSTAR.de_EXILE/
