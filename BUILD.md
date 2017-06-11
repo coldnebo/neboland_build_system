@@ -11,6 +11,8 @@ Thanks!
 
 -lk
 
+
+
 ## Server Assumptions
 
 While I have made an attempt to generalize these build scripts for multiple situations, I 
@@ -40,7 +42,13 @@ from a bash shell type:
 
 ```
 $ git clone https://github.com/coldnebo/neboland.git
+$ cd neboland
+$ gem install bundle
+$ bundle install
+$ rake -T
+$ cp config-example.json config.json      # and edit to your liking
 ```
+
 
 ## Overview
 
@@ -52,6 +60,7 @@ This server uses a two-pass build approach from source.
 * PASS2: The second pass uses Arma 3 Tools to compile pbos from `build/` and produce artifacts which are placed into `stage/`
 
 Finally, `stage/` files are deployed to a parallel structure off the server `config.ftp.basedir`.
+
 
 
 ## Structure
