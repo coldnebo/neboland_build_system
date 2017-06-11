@@ -109,7 +109,16 @@ build_pbo({
   source_dir: "source/mods/ExileAlive.Tanoa",
   target_pbo: "stage/mpmissions/ExileAlive.Tanoa.pbo",
       prefix: "ExileAlive.Tanoa"
-}) 
+}) do |conf|
+
+  infistar_files = Rake::FileList["source/mods/infiSTAR.de_EXILE/MPMission/**/*"]
+
+  infistar_files.each do |f|
+    build_file = f.pathmap("%{^source/mods/infiSTAR.de_EXILE/MPMission,#{conf.build_dir}}p")
+    stage(f,build_file)
+  end
+
+end
 
 
 
