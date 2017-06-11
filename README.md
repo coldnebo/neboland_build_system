@@ -13,9 +13,10 @@ is stored in dated blog posts, zip files and snippets... it makes
 it very difficult to provide a consistent build or even proper updates.
 
 Updaters are varied, however Steam seems to be gaining prominence for
-many of the open source mods.  For the closed source mods, we need a 
+many of the open source mods.  For other mods, we need a 
 way to systematically pull updates and deploy changes, while keeping
-changes to the system under source control.
+changes to the system under source control.  Commercial tools (like infiSTAR) 
+should also be excluded from source control.
 
 We also need to distinguish between build artifacts, security credentials
 and source. The current ad-hoc processes lead many people to avoid 
