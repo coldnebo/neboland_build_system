@@ -4,6 +4,7 @@
 [submodule "source/mods/occupation"]
 	path = source/mods/occupation
 	url = https://github.com/kuplion/a3_exile_occupation.git
+  branch = development
 [submodule "source/mods/ExileZ-2"]
 	path = source/mods/ExileZ-2
 	url = https://github.com/patrix87/ExileZ-2.git

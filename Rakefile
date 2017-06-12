@@ -65,10 +65,7 @@ task :generate do
 end
 
 
-desc "updates upstream dependencies"
+desc "updates git submodules"
 task :update do 
-
-  
-
-
+  exec("git submodule update --remote --rebase")
 end
