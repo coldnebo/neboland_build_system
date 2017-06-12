@@ -63,3 +63,12 @@ task :generate do
   puts "servermod=#{server_mods.join(";")}"
 
 end
+
+
+desc "updates upstream dependencies"
+task :update do 
+
+  
+
+
+end

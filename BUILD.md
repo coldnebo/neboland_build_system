@@ -123,6 +123,9 @@ Builds the server (everything ends up in `stage/`).
 
 Deploys the server (basically a deploy of everything in `stage/`).
 
+### rake update
+
+Updates upstream git dependencies.
 
 
 ## Submodule management
@@ -131,12 +134,4 @@ Dependencies on other mods like Defent's Exile Mission System (DMS) are managed 
 [git submodules](https://git-scm.com/docs/git-submodule) wherever those mods are maintained
 in github.  Other dependencies are manually maintained (such as Exile) and in some cases
 kept out of git altogether (such as commercial products like infiSTAR).
-
-When other github projects update (like DMS_Exile) you can update them easily by doing:
-
-```
-$ git submodule update
-```
-
-You can cd into a submod: e.g. `source/mods/DMS_Exile` and do regular git ops from there.
 
