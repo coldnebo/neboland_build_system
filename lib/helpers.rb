@@ -25,62 +25,65 @@ end
 def ftp
   @ftp ||= Object.new.tap {|o| 
     def o.download_to(local_dir, files)
-      Net::FTP.open(config.ftp.host) do |ftp|
-        ftp.connect(config.ftp.host, config.ftp.port)
-        ftp.login(config.ftp.username, config.ftp.password)
+      ftp = Net::FTP.new
+      ftp.connect(config.ftp.host, config.ftp.port)
+      ftp.login(config.ftp.username, config.ftp.password)
 
-        files.each do |file|
-          local_file = File.join(local_dir, file)
-          next if File.exist?(local_file)
-          remote_file = File.join(config.ftp.basedir,file)
+      files.each do |file|
+        local_file = File.join(local_dir, file)
+        next if File.exist?(local_file)
+        remote_file = File.join(config.ftp.basedir,file)
 
-          puts "#{local_file} <- #{remote_file}"
-          ftp.get(remote_file, local_file)
-        end
+        puts "#{local_file} <- #{remote_file}"
+        ftp.get(remote_file, local_file)
       end
+    ensure
+      ftp.close
     end
 
     def o.upload_from(local_dir, files, remote_overwrite=true)
-      Net::FTP.open(config.ftp.host) do |ftp|
-        ftp.connect(config.ftp.host, config.ftp.port)
-        ftp.login(config.ftp.username, config.ftp.password)
+      ftp = Net::FTP.new
+      ftp.connect(config.ftp.host, config.ftp.port)
+      ftp.login(config.ftp.username, config.ftp.password)
 
-        files.each do |file|
-          local_file = File.join(local_dir, file)
-          next unless File.exist?(local_file)
-          remote_file = File.join(config.ftp.basedir,file)
+      files.each do |file|
+        local_file = File.join(local_dir, file)
+        next unless File.exist?(local_file)
+        remote_file = File.join(config.ftp.basedir,file)
 
-          remote_exist = true
-          begin 
-            ftp.size(remote_file)
-          rescue Net::FTPPermError => e 
-            remote_exist = false
-          end
-          
-          if !remote_exist || (remote_exist && remote_overwrite)
-            puts "#{local_file} -> #{remote_file}"
-            ftp.put(local_file, remote_file)
-          end
+        remote_exist = true
+        begin 
+          ftp.size(remote_file)
+        rescue Net::FTPPermError => e 
+          remote_exist = false
+        end
+        
+        if !remote_exist || (remote_exist && remote_overwrite)
+          puts "#{local_file} -> #{remote_file}"
+          ftp.put(local_file, remote_file)
         end
       end
+    ensure
+      ftp.close
     end
 
     def o.mkdirs(dirs)
-      Net::FTP.open(config.ftp.host) do |ftp|
-        ftp.connect(config.ftp.host, config.ftp.port)
-        ftp.login(config.ftp.username, config.ftp.password)
+      ftp = Net::FTP.new
+      ftp.connect(config.ftp.host, config.ftp.port)
+      ftp.login(config.ftp.username, config.ftp.password)
 
-        dirs.each do |dir|
-          remote_dir = File.join(config.ftp.basedir,dir)
+      dirs.each do |dir|
+        remote_dir = File.join(config.ftp.basedir,dir)
 
-          puts "creating #{remote_dir}"
-          begin
-            ftp.mkdir(remote_dir)
-          rescue Net::FTPReplyError => e 
-            raise unless e.message =~ /^200 Command okay/
-          end
+        puts "creating #{remote_dir}"
+        begin
+          ftp.mkdir(remote_dir)
+        rescue Net::FTPReplyError => e 
+          raise unless e.message =~ /^200 Command okay/
         end
       end
+    ensure
+      ftp.close
     end
   }
 end
