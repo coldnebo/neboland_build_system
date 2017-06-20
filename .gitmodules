@@ -8,3 +8,6 @@
 [submodule "source/mods/ExileZ-2"]
 	path = source/mods/ExileZ-2
 	url = https://github.com/patrix87/ExileZ-2.git
+[submodule "source/mods/infiSTAR.de_EXILE"]
+	path = source/mods/infiSTAR.de_EXILE
+	url = D:/games/NeboLand_Projects/infiSTAR.de_EXILE

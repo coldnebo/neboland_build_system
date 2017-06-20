@@ -2,8 +2,5 @@ config.json
 build/
 stage/
 
-# we don't want to check in this commercial code
-source/mods/infiSTAR.de_EXILE/
-
-# we also don't want to check in my database files and scripts
+# we don't want to check in my database files and scripts
 database/
