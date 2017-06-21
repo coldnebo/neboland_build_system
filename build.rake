@@ -97,7 +97,7 @@ build_pbo({
   conf.process_files = Rake::FileList["#{conf.source_dir}/**/EXILE_AHAT_CONFIG.hpp"]
 
   # additional copy files...
-  dlls = Rake::FileList["source/mods/infiSTAR.de_EXILE/SERVER_ARMA3_FOLDER/*.dll"]
+  dlls =  Rake::FileList["source/mods/infiSTAR.de_EXILE/SERVER_ARMA3_FOLDER/@infiSTAR_Exile/*.dll"]
   dlls.each do |f|
     stage(f,f.pathmap("stage/%f"))
   end
