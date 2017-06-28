@@ -54,7 +54,10 @@ task :update_mods do
   # upload the new keys too
   key_files = Rake::FileList['source/keys/*.bikey']
   files = key_files.select{|f| File.file?(f)}.map{|f| f.pathmap("%{^source/,}p")}
-  ftp.upload_from("source", files)
+  files.each do |f|
+    stage(f,f.pathmap("%{^source,stage}p"))
+  end
+  ftp.upload_from("stage", files)
 end
 
 

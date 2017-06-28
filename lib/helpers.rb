@@ -63,6 +63,8 @@ def ftp
           ftp.put(local_file, remote_file)
         end
       end
+    rescue Net::FTPPermError => e 
+      abort("ERROR: Attempted to upload files that may be in use. You may want to shut down the server first (#{e.message.strip})")
     ensure
       ftp.close
     end
