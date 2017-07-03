@@ -41,8 +41,8 @@ After installing these tools, you should be able to setup by going into a worksp
 from a bash shell type:
 
 ```
-$ git clone https://github.com/coldnebo/neboland.git
-$ cd neboland
+$ git clone https://github.com/coldnebo/neboland_build_system.git
+$ cd neboland_build_system
 $ gem install bundle
 $ bundle install
 $ rake -T
