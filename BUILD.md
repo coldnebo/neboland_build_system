@@ -126,7 +126,7 @@ Deploys the server (basically a deploy of everything in `stage/`).
 
 ### rake update
 
-Updates upstream git dependencies.
+Updates git submodule dependencies.
 
 
 ## Submodule management
