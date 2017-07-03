@@ -1,6 +1,6 @@
 # NeboLand 2
 
-This project is the begining of a clean build of the 
+This project is the beginning of a clean build of the 
 NeboLand Exile server with an emphasis on total build 
 automation and best practices.
 
