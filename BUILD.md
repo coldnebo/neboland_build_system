@@ -84,6 +84,7 @@ rake clean        # Remove any temporary products
 rake clobber      # Remove any generated files
 rake deploy       # deploy the server
 rake generate     # generate command line for mods
+rake update       # updates git submodules
 rake update_mods  # update steam managed mods to server
 ```
 
