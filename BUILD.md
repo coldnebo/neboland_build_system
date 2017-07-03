@@ -1,8 +1,8 @@
-# NeboLand Arma Server Build Document
+# NeboLand Build System: Build Guide
 
 NeboLand Arma3/Exile/Zombies/Raptors is an exciting place.  Soon we will be opening up for public fun.
 
-This server/system should be taken as a sketch to improve build systems for the Arma dedicated server 
+The Neboland Build System should be taken as a sketch to improve build systems for the Arma dedicated server 
 community.  But it's also early days, I am only sketching this as far as I need to/can see.  
 Please feel free to adapt and build on this work either by fork or pull request if you see something you
 like and want to use.
@@ -13,7 +13,7 @@ Thanks!
 
 
 
-## Server Assumptions
+## Build and Server Environment Assumptions
 
 While I have made an attempt to generalize these build scripts for multiple situations, I 
 am developing for my specific situation with the following assumptions:
@@ -52,7 +52,7 @@ $ cp config-example.json config.json      # and edit to your liking
 
 ## Overview
 
-This server uses a two-pass build approach from source.  
+This build system uses a two-pass build approach from source.  
 
 * PASS1: The first pass injects values from `config.json`
   into `source/` files via the [Erubis](http://www.kuwata-lab.com/erubis/) templating engine and places the result 
