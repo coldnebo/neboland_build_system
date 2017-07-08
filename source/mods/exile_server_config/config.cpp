@@ -3666,7 +3666,7 @@ class CfgSettings
 		class Database 
 		{
 			// Remove all deleted items from the database after X days
-			permanentlyDeleteTime = 3;
+			permanentlyDeleteTime = 30;
 			
 			// Remove all territories (and contructions + containers in it) that were not paid after X days
 			territoryLifeTime = 7;
@@ -3680,16 +3680,16 @@ class CfgSettings
 			constructionLifeTime = 2;
 
 			// Remove all vehicles that were not moved/used for X days
-			vehicleLifeTime = 3;
+			vehicleLifeTime = 14;
 			
 			// Set safe as abandoned
-			abandonedTime = 7;
+			abandonedTime = 30;
 			
 			// Deletes a base X days after the flag is stolen if the ransom money isn't paid
-			stolenFlagLifeTime = 3;
+			stolenFlagLifeTime = 7;
 			
 			// Sets door & safe pins to 0000 and marks safes to abandoned X days after the flag is stolen if the ransom money isn't paid
-			unlockLifeTime = 2;
+			unlockLifeTime = 4;
 		};
 	};
 
@@ -3988,7 +3988,7 @@ class CfgSettings
 			weather type of be more dominant compared to others, add it multiple times
 		*/
 		//keyframes[] = {"Sunny", "Cloudy", "Thunderstorm"}; 
-		keyframes[] = {"Sunny"}; 
+		keyframes[] = {"Sunny", "Sunny", "Sunny", "Sunny", "Sunny", "Sunny", "Cloudy", "Cloudy", "Cloudy", "Thunderstorm"}; 
 
 		/*
 			This is a keyframe. Look up the BIKI to get more details about the parameters
