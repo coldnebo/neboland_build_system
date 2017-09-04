@@ -8,7 +8,7 @@ class EditorData
 	toggles=1;
 	class ItemIDProvider
 	{
-		nextID=208;
+		nextID=214;
 	};
 	class MarkerIDProvider
 	{
@@ -16,10 +16,10 @@ class EditorData
 	};
 	class Camera
 	{
-		pos[]={10709.701,429.51797,8766.9922};
-		dir[]={-0.18754281,-0.7173546,0.6709981};
-		up[]={-0.19309931,0.69670594,0.69087815};
-		aside[]={0.96309191,-6.5170752e-008,0.26918325};
+		pos[]={10768.077,522.88623,8683.3154};
+		dir[]={-0.031683072,-0.88925022,0.45633504};
+		up[]={-0.061592244,0.45740774,0.88712132};
+		aside[]={0.99760294,-3.0244701e-007,0.069263473};
 	};
 };
 binarizationWanted=0;
@@ -162,7 +162,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=138;
+		items=144;
 		class Item0
 		{
 			dataType="Group";
@@ -2696,14 +2696,14 @@ class Mission
 					};
 					id=125;
 					type="CUP_B_FR_Story_Rodriguez";
-					atlOffset=-0.053993225;
+					atlOffset=-0.053985596;
 				};
 			};
 			class Attributes
 			{
 			};
 			id=124;
-			atlOffset=-0.053993225;
+			atlOffset=-0.053985596;
 		};
 		class Item63
 		{
@@ -3172,7 +3172,7 @@ class Mission
 			class PositionInfo
 			{
 				position[]={6876.9038,4.8225217,7312.021};
-				angles[]={-0,5.4057212,0};
+				angles[]={0,5.4057212,0};
 			};
 			side="Empty";
 			flags=4;
@@ -3212,7 +3212,7 @@ class Mission
 			class PositionInfo
 			{
 				position[]={6928.5176,4.8225217,7483.041};
-				angles[]={-0,1.3966438,0};
+				angles[]={0,1.3966438,0};
 			};
 			side="Empty";
 			flags=4;
@@ -3252,7 +3252,7 @@ class Mission
 			class PositionInfo
 			{
 				position[]={2135.9668,15.609513,13319.881};
-				angles[]={-0,2.4787977,0};
+				angles[]={0,2.4787977,0};
 			};
 			side="Empty";
 			flags=4;
@@ -3375,7 +3375,7 @@ class Mission
 			class PositionInfo
 			{
 				position[]={11667.133,9.1125212,13124.487};
-				angles[]={-0,0.33980978,0};
+				angles[]={0,0.33980978,0};
 			};
 			side="Empty";
 			flags=4;
@@ -3415,7 +3415,7 @@ class Mission
 			class PositionInfo
 			{
 				position[]={6978.5112,4.8225217,7226.7725};
-				angles[]={-0,5.6359525,0};
+				angles[]={0,5.6359525,0};
 			};
 			side="Empty";
 			flags=4;
@@ -3455,7 +3455,7 @@ class Mission
 			class PositionInfo
 			{
 				position[]={2272.1572,15.6114,13426.941};
-				angles[]={-0,4.0378914,0};
+				angles[]={0,4.0378914,0};
 			};
 			side="Empty";
 			flags=4;
@@ -3537,7 +3537,7 @@ class Mission
 			class PositionInfo
 			{
 				position[]={2160.8379,15.112491,3471.5776};
-				angles[]={-0,4.4465137,0};
+				angles[]={0,4.4465137,0};
 			};
 			side="Empty";
 			flags=4;
@@ -3578,7 +3578,7 @@ class Mission
 			class PositionInfo
 			{
 				position[]={11901.728,9.1125212,13064.75};
-				angles[]={-0,0.29768506,0};
+				angles[]={0,0.29768506,0};
 			};
 			side="Empty";
 			flags=4;
@@ -4325,6 +4325,84 @@ class Mission
 			b=17;
 			id=207;
 			atlOffset=-292.82993;
+		};
+		class Item138
+		{
+			dataType="Marker";
+			position[]={3403.5229,0,6724.6411};
+			name="ExileMarker48_1";
+			text="Rautake";
+			markerType="ELLIPSE";
+			type="ExileSpawnZone";
+			colorName="ColorBlack";
+			alpha=0;
+			fillName="Border";
+			a=472.32999;
+			b=472.32999;
+			drawBorder=1;
+			id=208;
+			atlOffset=-7.1870046;
+		};
+		class Item139
+		{
+			dataType="Marker";
+			position[]={3403.5229,0,6724.6411};
+			name="ExileMarker49_1";
+			type="ExileSpawnZoneIcon";
+			id=209;
+			atlOffset=-7.1870046;
+		};
+		class Item140
+		{
+			dataType="Marker";
+			position[]={9422.4238,0,4086.293};
+			name="ExileMarker48_2";
+			text="Moddergat";
+			markerType="ELLIPSE";
+			type="ExileSpawnZone";
+			colorName="ColorBlack";
+			alpha=0;
+			fillName="Border";
+			a=472.32999;
+			b=472.32999;
+			drawBorder=1;
+			id=210;
+			atlOffset=-10.722407;
+		};
+		class Item141
+		{
+			dataType="Marker";
+			position[]={9422.4238,8.1644545,4086.2935};
+			name="ExileMarker49_2";
+			type="ExileSpawnZoneIcon";
+			id=211;
+			atlOffset=-2.5580273;
+		};
+		class Item142
+		{
+			dataType="Marker";
+			position[]={3098.875,0,11131.103};
+			name="ExileMarker48_3";
+			text="Belfort";
+			markerType="ELLIPSE";
+			type="ExileSpawnZone";
+			colorName="ColorBlack";
+			alpha=0;
+			fillName="Border";
+			a=472.32999;
+			b=472.32999;
+			drawBorder=1;
+			id=212;
+			atlOffset=-9.1645603;
+		};
+		class Item143
+		{
+			dataType="Marker";
+			position[]={3098.8745,6.625165,11131.103};
+			name="ExileMarker49_3";
+			type="ExileSpawnZoneIcon";
+			id=213;
+			atlOffset=-2.5393343;
 		};
 	};
 };
