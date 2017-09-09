@@ -130,6 +130,14 @@ build_pbo({
     stage(f,build_file)
   end
 
+  trader_files = Rake::FileList["source/mods/Trader-Mod/TRADERS/**/*"]
+  trader_files = trader_files.select{|f| File.file?(f) }
+
+  trader_files.each do |f|
+    build_file = f.pathmap("%{^source/mods/Trader-Mod/TRADERS,#{conf.build_dir}/TRADERS}p")
+    stage(f,build_file)
+  end
+
 end
 
 # attempt at merging the ALiVE mod with Exile.  The idea is to have Exile and DMS missions 
