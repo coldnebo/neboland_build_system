@@ -11,3 +11,6 @@
 [submodule "source/mods/infiSTAR.de_EXILE"]
 	path = source/mods/infiSTAR.de_EXILE
 	url = D:/games/NeboLand_Projects/infiSTAR.de_EXILE
+[submodule "source/mods/Trader-Mod"]
+	path = source/mods/Trader-Mod
+	url = https://github.com/redned70/Trader-Mod.git
