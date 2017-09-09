@@ -2715,14 +2715,14 @@ class CfgLocker
 {
 	numbersOnly = "0123456789";
 	
-	maxDeposit = 10000;
+	maxDeposit = 10000000;
 };
 
 class CfgPlayer 
 {
 	// In minutes ammount of time it takes to go from 100 - 0 if stationary
-	hungerDecay = 90;
-	thirstDecay = 60;
+	hungerDecay = 360; // 90 * 4
+	thirstDecay = 240; // 60 * 4
 
 	// Damage taken from 0 (health||thirst)/sec
 	healthDecay = 5.0;
