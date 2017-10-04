@@ -7,7 +7,7 @@ CLOBBER.include('stage/**/*')
 
 
 desc "build the server"
-multitask build: %w[build_erb build_untouched build_mods]
+multitask build: %w[build_erb build_untouched build_mods build_extra_missions]
 task :default => [:build]
 
 
@@ -39,6 +39,48 @@ task :build_untouched do
   untouched_files.each do |f|
     stage(f,f.pathmap("%{^source,stage}p"))
   end
+end
+
+
+
+# from redned70's instructions... tanoa missions
+
+task :build_extra_missions do 
+
+  missions_static = [
+    'Comms_Alpha_DMS_Static/comms_alpha.sqf', 
+    'Georgetown_Invasion_DMS_Static/georgetown.sqf', 
+    'Hotel_Invasion_DMS_Static/hotel_invasion.sqf']
+
+  missions_static.each do |f|
+    stage(
+      f.pathmap("source/mods/DMSStaticMissions/Tanoa Static/%p"),
+      f.pathmap("build/mods/a3_dms/missions/static/%f")
+    )
+  end
+
+  objects_static = [
+    'Comms_Alpha_DMS_Static/comms_alpha_buildings.sqf', 
+    'Georgetown_Invasion_DMS_Static/georgetown_buildings.sqf', 
+    'Hotel_Invasion_DMS_Static/hotel_invasion_buildings.sqf']
+
+  objects_static.each do |f|
+    stage(
+      f.pathmap("source/mods/DMSStaticMissions/Tanoa Static/%p"),
+      f.pathmap("build/mods/a3_dms/objects/static/%f")
+    )
+  end
+
+  bandit_missions = ['banditsZ.sqf', 'blackhawkdownZ.sqf', 'foodtransportZ.sqf', 'lost_battalionZ.sqf',
+                     'medicalZ.sqf', 'mercenariesZ.sqf', 'thievesZ.sqf']
+
+  bandit_missions.each do |f|
+    stage(
+      f.pathmap("source/mods/DMSBanditMissions/Z-Theme Missions/%p"),
+      f.pathmap("build/mods/a3_dms/missions/bandit/%f")
+    )
+  end
+
 end
 
 

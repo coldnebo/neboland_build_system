@@ -14,3 +14,9 @@
 [submodule "source/mods/Trader-Mod"]
 	path = source/mods/Trader-Mod
 	url = https://github.com/redned70/Trader-Mod.git
+[submodule "source/mods/DMSStaticMissions"]
+	path = source/mods/DMSStaticMissions
+	url = https://github.com/redned70/DMSStaticMissions.git
+[submodule "source/mods/DMSBanditMissions"]
+	path = source/mods/DMSBanditMissions
+	url = https://github.com/redned70/DMSBanditMissions.git
