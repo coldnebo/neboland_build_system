@@ -36,16 +36,20 @@ task :update_mods do
 
     # extract the key files...
     key_files = files.select{|f| f =~ /\.bikey$/ }
-    key_dir = root_to(File.join('source','keys'))
-    FileUtils.mkdir_p(key_dir) unless Dir.exist?(key_dir)
+    key_src_dir = root_to(File.join('source','keys'))
+    key_stg_dir = root_to(File.join('stage','keys'))
+    FileUtils.mkdir_p(key_src_dir) unless Dir.exist?(key_src_dir)
+    FileUtils.mkdir_p(key_stg_dir) unless Dir.exist?(key_stg_dir)
 
     # copy them to the local source dir...
     key_files.each do |key_file|
-      FileUtils.cp(key_file, key_dir, verbose: true)
+      FileUtils.cp(key_file, key_src_dir, verbose: true)
+      FileUtils.cp(key_file, key_stg_dir, verbose: true)
     end
 
     # copy an admin only client side key for @Ares
-    FileUtils.cp("@Ares/keys/Ares_1_8_0.bikey", key_dir, verbose: true)
+    FileUtils.cp("@Ares/keys/Ares_1_8_0.bikey", key_src_dir, verbose: true)
+    FileUtils.cp("@Ares/keys/Ares_1_8_0.bikey", key_stg_dir, verbose: true)
 
     ftp.mkdirs(dirs)
     ftp.upload_from(".", files, false)
